@@ -1,0 +1,336 @@
+fileFormatVersion: 2
+guid: f07ecc95bccf31b4d8ea9923df4f10fd
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Monster_StartLoop
+      takeName: AS_WeaselDragon_FarSkill_StartLoop
+      internalID: -6656760178188047724
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: AS_WeaselDragon_FarSkill_StartLoop(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: root
+      parentName: AS_WeaselDragon_FarSkill_StartLoop(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: pelvis
+      parentName: root
+      position: {x: 0.0067887586, y: -0.15118448, z: 1.0173644}
+      rotation: {x: 0.4999847, y: -0.49998477, z: -0.4999847, w: 0.5000458}
+      scale: {x: 1, y: 1, z: 1}
+    - name: tail_01
+      parentName: pelvis
+      position: {x: -0.2714189, y: -0.00060267636, z: 0.011173729}
+      rotation: {x: -0.021198595, y: 0.0031042688, z: 0.7407021, w: 0.6714919}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: tail_02
+      parentName: tail_01
+      position: {x: -0.88605773, y: 0.25778523, z: 0.0001349527}
+      rotation: {x: -0.03638442, y: 0.00000063749025, z: -0.116040915, w: 0.9925778}
+      scale: {x: 1.0000002, y: 1, z: 1.0000002}
+    - name: tail_03
+      parentName: tail_02
+      position: {x: -0.88366467, y: 0.29726943, z: 0.00010224667}
+      rotation: {x: -0.40539774, y: -0.89905006, z: -0.15876386, w: 0.046429973}
+      scale: {x: 1, y: 1.0000001, z: 0.99999994}
+    - name: tail_04
+      parentName: tail_03
+      position: {x: -0.89021444, y: 0.27336907, z: 0.00018138427}
+      rotation: {x: 0.0017395533, y: -0.063417464, z: -0.21448407, w: 0.974665}
+      scale: {x: 0.99999994, y: 0.9999999, z: 0.99999994}
+    - name: tail_05
+      parentName: tail_04
+      position: {x: -0.8884423, y: 0.29675543, z: 0}
+      rotation: {x: -0.06244089, y: -0.018158503, z: -0.28449357, w: 0.95647}
+      scale: {x: 1, y: 0.99999994, z: 1.0000001}
+    - name: spine_01
+      parentName: pelvis
+      position: {x: 0.28704882, y: 0, z: 7.56979e-10}
+      rotation: {x: -0.0013428144, y: 0.0020752589, z: 0.5350505, w: 0.84481645}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: spine_02
+      parentName: spine_01
+      position: {x: 0.8358912, y: 0.16650851, z: -0.00016304343}
+      rotation: {x: -0.0003967406, y: 0.0017700734, z: 0.19293803, w: 0.9812093}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: fur_03
+      parentName: spine_02
+      position: {x: 0.7158365, y: 0.68326634, z: 0}
+      rotation: {x: -1.5259399e-21, y: -4.9046713e-12, z: 0.08426161, w: 0.9964437}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: arm_01_l
+      parentName: spine_02
+      position: {x: 0.37497285, y: -0.5531906, z: 0.48694775}
+      rotation: {x: 0.26833865, y: 0.67143077, z: -0.25410685, w: 0.6423432}
+      scale: {x: 0.9999998, y: 0.99999994, z: 1}
+    - name: arm_02_l
+      parentName: arm_01_l
+      position: {x: -0.11765677, y: -0.00000009689331, z: 0}
+      rotation: {x: 0.0016479959, y: -0.0021973199, z: 0.02612384, w: 0.99965495}
+      scale: {x: 1.0000002, y: 1, z: 1.0000001}
+    - name: arm_03_l
+      parentName: arm_02_l
+      position: {x: -0.30831316, y: 0, z: -0.00000009689331}
+      rotation: {x: 0.0059611863, y: -0.035944443, z: -0.14149411, w: 0.98926836}
+      scale: {x: 0.99999994, y: 0.9999999, z: 1}
+    - name: arm_04_l
+      parentName: arm_03_l
+      position: {x: -0.29238388, y: -0.00000009689331, z: -0.00000009689331}
+      rotation: {x: -0.0016174739, y: -0.009186094, z: -0.26255077, w: 0.96487314}
+      scale: {x: 1, y: 1.0000002, z: 1.0000001}
+    - name: arm_01_r
+      parentName: spine_02
+      position: {x: 0.34006122, y: -0.48805088, z: -0.5252376}
+      rotation: {x: 0.77179766, y: -0.2553397, z: -0.55152255, w: -0.18695705}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: arm_02_r
+      parentName: arm_01_r
+      position: {x: 0.11765638, y: 0, z: 0.00000019378662}
+      rotation: {x: 0.014874782, y: -0.1306015, z: 0.022724876, w: 0.9910629}
+      scale: {x: 1.0000001, y: 0.9999999, z: 1}
+    - name: arm_03_r
+      parentName: arm_02_r
+      position: {x: 0.30831257, y: 0.00000019378662, z: 0}
+      rotation: {x: -0.0008338427, y: -0.013535303, z: -0.05528757, w: 0.99837846}
+      scale: {x: 0.99999994, y: 0.99999976, z: 0.99999976}
+    - name: arm_04_r
+      parentName: arm_03_r
+      position: {x: 0.29238525, y: -0.00000009689331, z: -0.00000019378662}
+      rotation: {x: -0.002655108, y: -0.008880891, z: -0.15308082, w: 0.9881702}
+      scale: {x: 1.0000001, y: 1, z: 0.99999994}
+    - name: spine_03
+      parentName: spine_02
+      position: {x: 1.0749843, y: 0.34308454, z: 0.00008817443}
+      rotation: {x: -0.009064, y: 0.031128881, z: 0.24027221, w: 0.970164}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: spine_04
+      parentName: spine_03
+      position: {x: 0.96565187, y: -0.17986867, z: 0.00006420393}
+      rotation: {x: -0.003971253, y: 0.007281323, z: -0.20187375, w: 0.97937644}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: spine_05
+      parentName: spine_04
+      position: {x: 0.49403805, y: -0.19494443, z: 0.00013850899}
+      rotation: {x: -0.0005188123, y: 0.0075991075, z: -0.23120826, w: 0.97287446}
+      scale: {x: 1.0000001, y: 0.99999994, z: 1.0000001}
+    - name: head
+      parentName: spine_05
+      position: {x: 0.52855104, y: -0.09966078, z: 0}
+      rotation: {x: -0.0009765923, y: 0.00094607257, z: -0.1950438, w: 0.9807936}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: whisker_01_r
+      parentName: head
+      position: {x: 0.30237573, y: -0.15787059, z: -0.6877364}
+      rotation: {x: -0.56767476, y: 0.3936278, z: 0.4242683, w: 0.58549035}
+      scale: {x: 1, y: 0.99999994, z: 0.9999998}
+    - name: whisker_03_r
+      parentName: whisker_01_r
+      position: {x: 0.12255027, y: 0.062595405, z: -0.23035784}
+      rotation: {x: 0.04345835, y: 0.33790106, z: 0.066316724, w: 0.93783605}
+      scale: {x: 0.99999994, y: 1, z: 0.9999999}
+    - name: whisker_02_r
+      parentName: whisker_01_r
+      position: {x: 0.17098317, y: 0.076556176, z: 0.16680726}
+      rotation: {x: 0.01211583, y: -0.5002289, z: 0.08853417, w: 0.86126995}
+      scale: {x: 0.9999999, y: 0.99999994, z: 0.99999976}
+    - name: whisker_01_l
+      parentName: head
+      position: {x: 0.30237806, y: -0.15786923, z: 0.68773675}
+      rotation: {x: 0.47358617, y: 0.54689175, z: -0.5186009, w: 0.45571774}
+      scale: {x: 1.0000001, y: 0.99999994, z: 0.9999999}
+    - name: whisker_03_l
+      parentName: whisker_01_l
+      position: {x: -0.1225493, y: -0.06259812, z: 0.23035687}
+      rotation: {x: 0.06576741, y: 0.32932526, z: 0.108706936, w: 0.93562937}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: whisker_02_l
+      parentName: whisker_01_l
+      position: {x: -0.17098112, y: -0.0765554, z: -0.16680804}
+      rotation: {x: -0.061983086, y: -0.35901976, z: 0.14163642, w: 0.9204358}
+      scale: {x: 1.0000001, y: 1, z: 0.99999994}
+    - name: ear_01_l
+      parentName: head
+      position: {x: 0.39574134, y: 0.3758844, z: 0.45310456}
+      rotation: {x: 0.34073907, y: 0.26749474, z: -0.5029145, w: 0.7479442}
+      scale: {x: 0.99999994, y: 0.99999976, z: 0.9999999}
+    - name: ear_02_l
+      parentName: ear_01_l
+      position: {x: -0.73985195, y: 0, z: 0}
+      rotation: {x: 0.0015869742, y: 0.03964354, z: 0.029450363, w: 0.9987785}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: ear_01_r
+      parentName: head
+      position: {x: 0.3957208, y: 0.37588674, z: -0.45310524}
+      rotation: {x: -0.19138148, y: 0.2848903, z: 0.7582324, w: 0.5543413}
+      scale: {x: 1.0000001, y: 0.99999976, z: 1}
+    - name: ear_02_r
+      parentName: ear_01_r
+      position: {x: 0.7398418, y: -0.000020541382, z: 0}
+      rotation: {x: -0.0011291958, y: -0.061922036, z: 0.016296895, w: 0.99794734}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.9999998}
+    - name: fur_01
+      parentName: spine_04
+      position: {x: 0.27412203, y: 0.5748308, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: fur_02
+      parentName: spine_03
+      position: {x: 0.82593215, y: 0.53425413, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.9999999, y: 1, z: 1}
+    - name: leg_01_l
+      parentName: pelvis
+      position: {x: -0.14154208, y: -0.49891546, z: 0.509982}
+      rotation: {x: 0.3408612, y: 0.90975684, z: 0.088381566, w: 0.21987464}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: leg_02_l
+      parentName: leg_01_l
+      position: {x: -0.4679511, y: 0, z: -0.000000048446655}
+      rotation: {x: -0.000000018113633, y: 0.000000009548642, z: -0.1503647, w: 0.9886306}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: leg_01_r
+      parentName: pelvis
+      position: {x: -0.1415422, y: -0.49891555, z: -0.49677825}
+      rotation: {x: 0.8988006, y: -0.33814508, z: -0.26102477, w: 0.098394066}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: leg_02_r
+      parentName: leg_01_r
+      position: {x: 0.46795088, y: 0, z: 0}
+      rotation: {x: -0.000000010187613, y: 0.0000000026392835, z: -0.1503647, w: 0.9886306}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: SK_WeaselDragon
+      parentName: AS_WeaselDragon_FarSkill_StartLoop(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

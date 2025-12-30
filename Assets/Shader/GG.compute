@@ -1,0 +1,21 @@
+#pragma kernel CSMain
+
+RWTexture2D<float> Result;
+
+int _GlobalOffsetX;
+int _GlobalOffsetY;
+int _VirtualWidth;
+int _VirtualHeight;
+
+[numthreads(8, 8, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    int globalX = _GlobalOffsetX + id.x;
+    int globalY = _GlobalOffsetY + id.y;
+
+    if (globalX >= _VirtualWidth || globalY >= _VirtualHeight)
+        return;
+
+    Result[int2(id.x, id.y)] =
+        sin(globalX * 0.001) * cos(globalY * 0.001);
+}
