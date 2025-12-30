@@ -22,6 +22,12 @@ public class ChunkWorld : MonoBehaviour
     [Header("Terrain Constraints")]
     public float maxSlopeAngle = 30f; // Maximum slope (in degrees) to place objects
 
+    [Header("Flower Setting")]
+    public int minFlowerAppear = 2;
+    public int maxFlowerAppear = 5;
+    public int minFlowerPerCluster = 3;
+    public int maxFlowerPerCluster = 8;
+
     private Dictionary<Vector2Int, GameObject> loadedChunks = new Dictionary<Vector2Int, GameObject>();
 
     private void Start()
@@ -129,9 +135,52 @@ public class ChunkWorld : MonoBehaviour
                     Spawn(treePrefab, pos, parent);
                 else if (noise > 0.3f)      // Stone
                     Spawn(stonePrefab, pos, parent);
-                else                         // Flower
-                    Spawn(flowerPrefab, pos, parent);
+                //Flower gonna skipped here
             }
+        }
+
+        /* Benefit of Sloping Flower 
+        Flowers can have different density and spacing.
+
+        Flowers can tolerate different slopes than trees/stones.
+
+        Flowers can have special behaviors (sway, move, etc.) without affecting trees and stones.
+
+        Keeps generation modular and easy to tweak.
+        */
+        int clusters = Random.Range(minFlowerAppear, maxFlowerAppear); // number of flower groups per chunk
+        int flowersPerCluster = Random.Range(minFlowerPerCluster, maxFlowerPerCluster); // flowers per group
+
+        for (int i = 0; i < clusters; i++)
+        {
+            // Random cluster center within chunk
+            Vector3 clusterCenter = parent.position + new Vector3(
+                Random.Range(0f, chunkSize),
+                0,
+                Random.Range(0f, chunkSize)
+            );
+            clusterCenter.y = terrain.SampleHeight(clusterCenter);
+
+            for (int j = 0; j < flowersPerCluster; j++)
+            {
+                // Small random offset from cluster center
+                Vector3 offset = new Vector3(
+                    Random.Range(-1f, 1f),
+                    0,
+                    Random.Range(-1f, 1f)
+                );
+                Vector3 pos = clusterCenter + offset;
+                pos.y = terrain.SampleHeight(pos);
+
+                // Optional: check slope for flowers
+                float slope = terrain.terrainData.GetSteepness(pos.x / terrain.terrainData.size.x, pos.z / terrain.terrainData.size.z);
+                if (slope > maxSlopeAngle + 10f) continue;
+
+                Spawn(flowerPrefab, pos, parent);
+                Debug.Log("Spawned flower at " + pos);
+
+            }
+
         }
     }
 

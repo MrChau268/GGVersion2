@@ -44,7 +44,6 @@ public class CollisionSound : MonoBehaviour
         {
             playerInside = true;
             hasPlayed = false; // reset for new entry
-            Debug.Log("Player entered trigger, press T to play sound.");
         }
     }
 
@@ -54,7 +53,6 @@ public class CollisionSound : MonoBehaviour
         {
             playerInside = false;
             hasPlayed = false;
-            Debug.Log("Player left trigger.");
         }
     }
 
