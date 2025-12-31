@@ -16,13 +16,17 @@ public class ChunkWorld : MonoBehaviour
     [Range(0f, 1f)] public float spawnChance = 0.8f;
 
     public GameObject treePrefab;
-    public GameObject stonePrefab;
-    public GameObject flowerPrefab;
+    [Header("Stones Setting")]
+
+    //List of stones
+    public GameObject[] stonePrefab;
+
 
     [Header("Terrain Constraints")]
     public float maxSlopeAngle = 30f; // Maximum slope (in degrees) to place objects
 
     [Header("Flower Setting")]
+    public GameObject flowerPrefab;
     public int minFlowerAppear = 2;
     public int maxFlowerAppear = 5;
     public int minFlowerPerCluster = 3;
@@ -101,6 +105,7 @@ public class ChunkWorld : MonoBehaviour
 
         GenerateObjects(chunk.transform, coord);
         loadedChunks.Add(coord, chunk);
+        chunk.isStatic = true;
     }
 
     #endregion
@@ -133,8 +138,12 @@ public class ChunkWorld : MonoBehaviour
                 // Adjusted probabilities: more trees, fewer stones
                 if (noise > 0.5f)           // Tree
                     Spawn(treePrefab, pos, parent);
-                else if (noise > 0.3f)      // Stone
-                    Spawn(stonePrefab, pos, parent);
+                else if (noise > 0.3f && stonePrefab.Length > 0)      // Stone
+                {
+                    GameObject randomStone = stonePrefab[Random.Range(0, stonePrefab.Length)];
+                    Spawn(randomStone, pos, parent);
+                }
+
                 //Flower gonna skipped here
             }
         }
@@ -175,10 +184,7 @@ public class ChunkWorld : MonoBehaviour
                 // Optional: check slope for flowers
                 float slope = terrain.terrainData.GetSteepness(pos.x / terrain.terrainData.size.x, pos.z / terrain.terrainData.size.z);
                 if (slope > maxSlopeAngle + 10f) continue;
-
                 Spawn(flowerPrefab, pos, parent);
-                Debug.Log("Spawned flower at " + pos);
-
             }
 
         }
@@ -189,6 +195,8 @@ public class ChunkWorld : MonoBehaviour
         GameObject obj = Instantiate(prefab, pos, Quaternion.identity, parent);
         obj.transform.localScale *= Random.Range(0.8f, 1.2f);
         obj.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+        // Mark as occlusion static for Unity's culling system
+        obj.isStatic = true;
     }
 
     #endregion

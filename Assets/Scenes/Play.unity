@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 43f357addf08bc74bb4c0109992a52a1
+  m_OcclusionCullingData: {fileID: 36300000, guid: fdc759d1cc772114e99dfcb5a6d7392b, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -22418,7 +22418,7 @@ GameObject:
   - component: {fileID: 1667778265}
   m_Layer: 0
   m_Name: ThirdPersonCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25507,9 +25507,22 @@ MonoBehaviour:
   objectSpacing: 10
   spawnChance: 0.8
   treePrefab: {fileID: 1775774423711436790, guid: 4d87fa3d1192c67438fafd134ba31543, type: 3}
-  stonePrefab: {fileID: 5805924593818405919, guid: 937d59206e97dfa4cba48f70895250d7, type: 3}
-  flowerPrefab: {fileID: 3484895615649732206, guid: 551e4613df951a545a6dd592bbdc6899, type: 3}
+  stonePrefab:
+  - {fileID: 4748423988687112623, guid: c9ca9ee929efc4e4eb38ed1cbe1dc2d8, type: 3}
+  - {fileID: 626871053118663885, guid: 27334ac90b57aca4ab3a4a20bb726500, type: 3}
+  - {fileID: 1550846654900821461, guid: 2b7fe2731e944594c95be109dc270541, type: 3}
+  - {fileID: 9171151329062358462, guid: 5da47beaa7d290443b961ca1d5d6a838, type: 3}
+  - {fileID: 5286555755344633319, guid: 0e271a51f6caf1a4d8e48983a8d6caf2, type: 3}
+  - {fileID: 4868385916332913533, guid: d0d1ecae419694f4aa4499bb3526e748, type: 3}
+  - {fileID: 9209883347490107107, guid: b6fe6874bf3b53248a9ea6e4bc06389c, type: 3}
+  - {fileID: 5742613051752623418, guid: 453c61853d2421c4eb5364e05deb7563, type: 3}
+  - {fileID: 1943840481686832250, guid: b624eb0dda237994d8d9b91e71be14ea, type: 3}
   maxSlopeAngle: 30
+  flowerPrefab: {fileID: 3484895615649732206, guid: 551e4613df951a545a6dd592bbdc6899, type: 3}
+  minFlowerAppear: 2
+  maxFlowerAppear: 5
+  minFlowerPerCluster: 3
+  maxFlowerPerCluster: 8
 --- !u!4 &1948739487
 Transform:
   m_ObjectHideFlags: 0
