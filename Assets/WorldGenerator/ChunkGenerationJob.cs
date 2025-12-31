@@ -36,7 +36,7 @@ public struct ChunkGenerationJob : IJob
                     chunkCoord.y * chunkSize + z
                 );
 
-                float noise = Unity.Mathematics.noise.cnoise(worldPos.xz * 0.1f);
+                float noise = Unity.Mathematics.noise.snoise(worldPos.xz * 0.1f);
 
                 if (noise > 0.5f)
                 {
