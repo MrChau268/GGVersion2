@@ -58,24 +58,43 @@ public class AxeEquipController : MonoBehaviour
         }
     }
 
+    /*
+        void TryCutTree()
+        {
+            if (treeHighlighter == null)
+            {
+                Debug.LogWarning("TreeHighlighter is not assigned.");
+                return;
+            }
+
+            GameObject tree = treeHighlighter.GetCurrentHighlightedTree();
+            if (tree == null)
+            {
+                Debug.Log("No tree is currently highlighted.");
+                return;
+            }
+
+            Debug.Log("Tree cut: " + tree.name);
+            Destroy(tree);
+        }
+    */
 
     void TryCutTree()
     {
-        if (treeHighlighter == null)
-        {
-            Debug.LogWarning("TreeHighlighter is not assigned.");
-            return;
-        }
+        Camera cam = Camera.main;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        GameObject tree = treeHighlighter.GetCurrentHighlightedTree();
-        if (tree == null)
+        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
         {
-            Debug.Log("No tree is currently highlighted.");
-            return;
-        }
+            if (hit.collider.CompareTag("Tree"))
+            {
+                GameObject tree = hit.collider.gameObject;
 
-        Debug.Log("Tree cut: " + tree.name);
-        Destroy(tree);
+                Debug.Log("Tree cut: " + tree.name);
+
+                Destroy(tree);
+            }
+        }
     }
 
 

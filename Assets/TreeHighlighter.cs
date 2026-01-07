@@ -2,6 +2,66 @@ using UnityEngine;
 
 public class TreeHighlighter : MonoBehaviour
 {
+
+
+    [Header("Settings")]
+    public Camera playerCamera;
+    public float highlightDistance = 6f;
+    public LayerMask treeLayer;
+    public Material highlightMaterial;
+
+    private Renderer currentRenderer;
+    private Material originalMaterial;
+    private bool isHighlightingEnabled;
+
+    void Update()
+    {
+        if (!isHighlightingEnabled)
+        {
+            ClearHighlight();
+            return;
+        }
+
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, highlightDistance, treeLayer))
+        {
+            Renderer rend = hit.collider.GetComponentInChildren<Renderer>();
+
+            if (rend != null && rend != currentRenderer)
+            {
+                ClearHighlight();
+                currentRenderer = rend;
+                originalMaterial = rend.material;
+                rend.material = highlightMaterial;
+            }
+        }
+        else
+        {
+            ClearHighlight();
+        }
+    }
+
+    void ClearHighlight()
+    {
+        if (currentRenderer != null)
+        {
+            currentRenderer.material = originalMaterial;
+            currentRenderer = null;
+        }
+    }
+
+    public void SetHighlighting(bool enabled)
+    {
+        isHighlightingEnabled = enabled;
+        if (!enabled) ClearHighlight();
+    }
+
+    public GameObject GetCurrentHighlightedTree()
+    {
+        return currentRenderer != null ? currentRenderer.gameObject : null;
+    }
+    /*
     [Header("Highlight Settings")]
     public Material highlightMaterial;
     public float highlightDistance = 6f;
@@ -109,5 +169,5 @@ public class TreeHighlighter : MonoBehaviour
     {
         return currentHighlighted != null ? currentHighlighted.gameObject : null;
     }
-
+*/
 }
