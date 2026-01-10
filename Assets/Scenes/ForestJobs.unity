@@ -14218,7 +14218,7 @@ MonoBehaviour:
   - {fileID: 1943840481686832250, guid: b624eb0dda237994d8d9b91e71be14ea, type: 3}
   flowerPrefab: {fileID: 3484895615649732206, guid: 551e4613df951a545a6dd592bbdc6899, type: 3}
   highlightDistance: 5
-  highlightMaterial: {fileID: 2100000, guid: dbd6c303c72318d45b8cc033760bc214, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 38c77ef403608e545bd55b72f8e9ff11, type: 2}
 --- !u!1 &1871171542
 GameObject:
   m_ObjectHideFlags: 0
