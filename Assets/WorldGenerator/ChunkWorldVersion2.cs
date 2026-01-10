@@ -23,6 +23,13 @@ public class ChunkWorldVersion2 : MonoBehaviour
     public GameObject[] stonePrefabs;
     public GameObject flowerPrefab;
 
+    [Header("Highlight Settings")]
+    public float highlightDistance = 5f;
+    public Material highlightMaterial;
+    private GameObject currentHighlighted;
+    private Material originalMaterial;
+    private Renderer currentRenderer;
+
     private Dictionary<Vector2Int, GameObject> loadedChunks = new();
 
     void Start()
@@ -34,6 +41,7 @@ public class ChunkWorldVersion2 : MonoBehaviour
     {
         GenerateChunksAroundPlayer();
         UnloadDistantChunks();
+        HandleHighlight();
     }
 
     void GenerateChunksAroundPlayer()
@@ -84,6 +92,7 @@ public class ChunkWorldVersion2 : MonoBehaviour
 
     void CreateChunk(Vector2Int coord)
     {
+
         ChunkWorldData data = GenerateChunkData(coord);
 
         GameObject chunk = new GameObject($"Chunk {coord}");
@@ -104,6 +113,7 @@ public class ChunkWorldVersion2 : MonoBehaviour
 
             Instantiate(prefab, pos, Quaternion.identity, chunk.transform);
         }
+
 
         loadedChunks.Add(coord, chunk);
     }
@@ -134,4 +144,68 @@ public class ChunkWorldVersion2 : MonoBehaviour
         jobResults.Dispose();
         return data;
     }
+
+    void HandleHighlight()
+    {
+        Ray ray = new Ray(player.position + Vector3.up * 1.5f, player.forward);
+        Debug.DrawRay(ray.origin, ray.direction * highlightDistance, Color.red);
+
+        GameObject hitHighlightable = null;
+        Renderer hitRenderer = null;
+
+        if (Physics.Raycast(ray, out RaycastHit hit, highlightDistance))
+        {
+            Transform t = hit.collider.transform;
+
+            // Walk up to Highlightable root
+            while (t != null && !t.CompareTag("Highlightable"))
+                t = t.parent;
+
+            if (t != null)
+            {
+                hitRenderer = t.GetComponentInChildren<Renderer>();
+                if (hitRenderer != null)
+                {
+                    hitHighlightable = t.gameObject;
+
+                    if (currentHighlighted != hitHighlightable)
+                    {
+                        ResetHighlight();
+
+                        originalMaterial = hitRenderer.material;
+                        hitRenderer.material = highlightMaterial;
+
+                        currentHighlighted = hitHighlightable;
+                        currentRenderer = hitRenderer;
+
+                        Debug.Log("Highlighted: " + hitHighlightable.name);
+                    }
+                }
+            }
+        }
+
+        // 🔑 THIS guarantees un-highlight when looking away
+        if (currentHighlighted != null && currentHighlighted != hitHighlightable)
+        {
+            ResetHighlight();
+        }
+    }
+
+
+
+
+
+    void ResetHighlight()
+    {
+        if (currentRenderer != null && originalMaterial != null)
+        {
+            currentRenderer.material = originalMaterial;
+        }
+
+        currentHighlighted = null;
+        currentRenderer = null;
+        originalMaterial = null;
+    }
+
+
 }

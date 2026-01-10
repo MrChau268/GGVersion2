@@ -9,46 +9,54 @@ public class AxeEquipUIController : MonoBehaviour
     [Header("References")]
     public GameObject axeObject;
     public Camera playerCamera;
-    [Header("Setting")]
+
+    [Header("Settings")]
     public float fadeDuration = 0.4f;
     public float interactDistance = 3f;
     public KeyCode equipKey = KeyCode.Alpha1;
     public KeyCode cutKey = KeyCode.E;
-    private Renderer axeRendere;
+
+    private Renderer axeRenderer;
     private bool isEquipped;
 
-    protected void Start()
+    void Start()
     {
-        axeRendere = axeObject.GetComponentInChildren<Renderer>();
+        axeRenderer = axeObject.GetComponentInChildren<Renderer>();
         axeObject.SetActive(false);
+
         SetAxeAlpha(0f);
     }
 
-    protected void SetAxeAlpha(float alpha)
+    void Update()
     {
-        Color c = axeRendere.material.color;
-        c.a = alpha;
-        axeRendere.material.color = c;
+        if (Input.GetKeyDown(equipKey))
+            ToggleAxe();
+
+        if (isEquipped && Input.GetKeyDown(cutKey))
+            TryCutTree();
     }
 
-    protected void ToggleAxe()
+    void ToggleAxe()
     {
         isEquipped = !isEquipped;
+
         axeObject.SetActive(true);
+
         float targetAlpha = isEquipped ? 1f : 0f;
-        axeRendere.material.DOFade(targetAlpha, fadeDuration).OnComplete(() =>
-        {
-            if (!isEquipped)
+
+        axeRenderer.material
+            .DOFade(targetAlpha, fadeDuration)
+            .OnComplete(() =>
             {
-                axeObject.SetActive(false);
-            }
-        });
+                if (!isEquipped)
+                    axeObject.SetActive(false);
+            });
     }
 
-
-    protected void TryCutTree()
+    void TryCutTree()
     {
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
         {
             if (hit.collider.CompareTag("Tree"))
@@ -59,4 +67,10 @@ public class AxeEquipUIController : MonoBehaviour
         }
     }
 
+    void SetAxeAlpha(float alpha)
+    {
+        Color c = axeRenderer.material.color;
+        c.a = alpha;
+        axeRenderer.material.color = c;
+    }
 }

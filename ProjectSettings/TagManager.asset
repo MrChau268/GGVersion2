@@ -13,6 +13,7 @@ TagManager:
   - Inventorhy
   - Tree
   - NPC
+  - Highlightable
   layers:
   - Default
   - TransparentFX
