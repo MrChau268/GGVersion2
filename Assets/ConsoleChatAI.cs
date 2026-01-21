@@ -2,82 +2,94 @@ using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using TMPro;
 
-public class ChatGPTConsoleInteractive : MonoBehaviour
+public class OllamaChatEnter : MonoBehaviour
 {
-    [SerializeField] private string apiKey;
+    public TMP_InputField sendInput;
+    public TMP_Text receiveText;
 
-    private string userInput = "";
-    private bool isSending = false;
+    private const string ollamaUrl = "http://localhost:11434/api/generate";
+    private const string modelName = "llama3";
 
-    // gpt-4.1-mini blended cost ≈ $0.42 / 1M tokens
-    private const float COST_PER_TOKEN = 0.00000042f;
-
-    void OnGUI()
+    void Start()
     {
-        GUI.Label(new Rect(10, 10, 400, 20), "ChatGPT Console (Press Enter)");
+        Debug.Log("[Ollama] Chat ready");
+        sendInput.lineType = TMP_InputField.LineType.SingleLine;
 
-        userInput = GUI.TextField(
-            new Rect(10, 35, 400, 25),
-            userInput,
-            500
-        );
+        sendInput.onSubmit.AddListener(OnSubmit);
+        sendInput.ActivateInputField();
+    }
 
-        if (Event.current.isKey &&
-            Event.current.keyCode == KeyCode.Return &&
-            !isSending &&
-            !string.IsNullOrEmpty(userInput))
+    void OnSubmit(string text)
+    {
+        Debug.Log("[Ollama] Submit detected");
+
+        if (string.IsNullOrWhiteSpace(text))
         {
-            Send(userInput);
-            userInput = "";
+            Debug.LogWarning("[Ollama] Empty input");
+            sendInput.ActivateInputField();
+            return;
         }
+
+        receiveText.text = "Thinking...";
+        StartCoroutine(SendToOllama(text));
+
+        sendInput.text = "";
+        sendInput.ActivateInputField();
     }
 
-    void Send(string prompt)
+    IEnumerator SendToOllama(string prompt)
     {
-        Debug.Log("YOU: " + prompt);
-        StartCoroutine(Request(prompt));
-    }
+        Debug.Log("[Ollama] Sending: " + prompt);
 
-    IEnumerator Request(string prompt)
-    {
-        isSending = true;
+        OllamaRequest requestData = new OllamaRequest
+        {
+            model = modelName,
+            prompt = prompt,
+            stream = false
+        };
 
-        string json = $@"
-        {{
-            ""model"": ""gpt-4.1-nano"",
-            ""input"": ""{prompt}"",
-            ""max_output_tokens"": 150
-        }}";
+        string json = JsonUtility.ToJson(requestData);
+        Debug.Log("[Ollama] JSON: " + json);
 
-        var request = new UnityWebRequest(
-            "https://api.openai.com/v1/responses",
-            "POST"
-        );
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
 
-        request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
+        using UnityWebRequest request = new UnityWebRequest(ollamaUrl, "POST");
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        request.SetRequestHeader("Authorization", "Bearer " + apiKey);
 
         yield return request.SendWebRequest();
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError(request.error);
-            isSending = false;
-            yield break;
+            Debug.LogError("[Ollama] Error: " + request.error);
+            receiveText.text = "Error: " + request.error;
         }
+        else
+        {
+            string raw = request.downloadHandler.text;
+            Debug.Log("[Ollama] Raw response: " + raw);
 
-        string raw = request.downloadHandler.text;
-        Debug.Log("CHATGPT RAW:\n" + raw);
+            OllamaResponse response =
+                JsonUtility.FromJson<OllamaResponse>(raw);
 
-        int estimatedTokens = (prompt.Length / 4) + 150;
-        float estimatedCost = estimatedTokens * COST_PER_TOKEN;
-
-        Debug.Log($"Estimated tokens: {estimatedTokens}");
-        Debug.Log($"Estimated cost: ${estimatedCost:F6}");
-
-        isSending = false;
+            receiveText.text = response.response;
+        }
     }
+}
+
+[System.Serializable]
+public class OllamaRequest
+{
+    public string model;
+    public string prompt;
+    public bool stream;
+}
+
+[System.Serializable]
+public class OllamaResponse
+{
+    public string response;
 }
