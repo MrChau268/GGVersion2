@@ -51,6 +51,8 @@ public class FairyMessageUI : MonoBehaviour
     public Ease popupEaseOut = Ease.InBack;
 
     private bool isActivated = false;
+    public GameObject movementLockPrefab;
+    private GameObject movementLockInstance;
 
 
 
@@ -144,6 +146,7 @@ public class FairyMessageUI : MonoBehaviour
 
         if (panel != null && !panel.activeSelf)
         {
+            movementLockInstance = Instantiate(movementLockPrefab);
             panel.SetActive(true);
             panel.transform.localScale = Vector3.zero;
 
@@ -241,6 +244,8 @@ public class FairyMessageUI : MonoBehaviour
         HideChoiceButtons();
         currentIndex = -1;
         isSessionEnded = true;
+        Destroy(movementLockInstance);
+
 
         // 👇 Scale out animation
         panel.transform.DOScale(0f, popupOutDuration)
