@@ -14,12 +14,15 @@ public class GPopupTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log($"Trigger entered by: {other.name}");
-        if (triggered) return;
+        //if (triggered) return;
         if (!other.CompareTag("Player"))
         {
             Debug.Log("Not player – ignored");
             return;
         }
+
+        Debug.Log("✅ COLLIDED WITH PLAYER");
+
         triggered = true;
 
         GPopupManager.Instance.ShowPopupData(

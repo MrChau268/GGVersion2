@@ -2,36 +2,56 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
-using System;
-using UnityEngine.SocialPlatforms;
 
 public class GPopupUI : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField]
-    protected TMP_Text messageText;
-    [SerializeField]
-    protected Button cancelBtn;
-    [SerializeField]
-    protected Button confirmBtn;
+    [SerializeField] protected TMP_Text messageText;
+    [SerializeField] protected Button cancelBtn;
+    [SerializeField] protected Button confirmBtn;
 
     [Header("Animation")]
-    [SerializeField]
-    protected float animationDuration = 0.25f;
+    [SerializeField] protected float animationDuration = 0.25f;
 
-    CanvasGroup canvasGroup;
-    GPopupData popupData;
+    private CanvasGroup canvasGroup;
+    private GPopupData popupData;
+    private Coroutine animationRoutine;
 
-
-    protected void Awake()
+    private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+
+        // Ensure clean initial state
+        canvasGroup.alpha = 0f;
+        transform.localScale = Vector3.one * 0.8f;
+
         gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log("GPopupUI ENABLED (popup shown)");
+
+        // Reset visual state every time (important for pooling)
+        canvasGroup.alpha = 0f;
+        transform.localScale = Vector3.one * 0.8f;
+
+        StartAnimateIn();
+    }
+
+    private void OnDisable()
+    {
+        Debug.Log("GPopupUI DISABLED (popup hidden)");
+        CancelInvoke();
     }
 
     public void ShowPopup(GPopupData data)
     {
+        gameObject.SetActive(true);
         popupData = data;
+
         messageText.text = data.message;
 
         confirmBtn.onClick.RemoveAllListeners();
@@ -50,8 +70,10 @@ public class GPopupUI : MonoBehaviour
         });
 
         cancelBtn.gameObject.SetActive(data.onCancel != null);
-        gameObject.SetActive(true);
-        if (data.autoCloseTime > 0)
+
+        
+
+        if (data.autoCloseTime > 0f)
         {
             Invoke(nameof(ClosePopup), data.autoCloseTime);
         }
@@ -60,42 +82,64 @@ public class GPopupUI : MonoBehaviour
     public void ClosePopup()
     {
         CancelInvoke();
-        StartCoroutine(AnimateOut());
+        StartAnimateOut();
     }
 
+    // ------------------ Animation ------------------
 
-    IEnumerator AnimateIn()
+    private void StartAnimateIn()
     {
-        float time = 0;
-        canvasGroup.alpha = 0;
-        transform.localScale = Vector3.one * 0.8f;
+        if (animationRoutine != null)
+            StopCoroutine(animationRoutine);
+
+        animationRoutine = StartCoroutine(AnimateIn());
+    }
+
+    private void StartAnimateOut()
+    {
+        if (animationRoutine != null)
+            StopCoroutine(animationRoutine);
+
+        animationRoutine = StartCoroutine(AnimateOut());
+    }
+
+    private IEnumerator AnimateIn()
+    {
+        float time = 0f;
 
         while (time < animationDuration)
         {
             time += Time.unscaledDeltaTime;
-            float alpha = time / animationDuration;
-            canvasGroup.alpha = alpha;
-            transform.localScale = Vector3.one * Mathf.Lerp(0.8f, 1f, alpha);
+            float t = time / animationDuration;
+
+            canvasGroup.alpha = t;
+            transform.localScale = Vector3.one * Mathf.Lerp(0.8f, 1f, t);
+
             yield return null;
         }
 
-        canvasGroup.alpha = 1;
+        canvasGroup.alpha = 1f;
         transform.localScale = Vector3.one;
     }
 
-    IEnumerator AnimateOut()
+    private IEnumerator AnimateOut()
     {
-        float time = 0;
+        float time = 0f;
+
         while (time < animationDuration)
         {
             time += Time.unscaledDeltaTime;
-            float alpha = time / animationDuration;
-            canvasGroup.alpha = 1 - alpha;
-            transform.localScale = Vector3.one * Mathf.Lerp(1f, 0.8f, alpha);
+            float t = time / animationDuration;
+
+            canvasGroup.alpha = 1f - t;
+            transform.localScale = Vector3.one * Mathf.Lerp(1f, 0.8f, t);
+
             yield return null;
         }
 
-        gameObject.SetActive(false);    
+        canvasGroup.alpha = 0f;
+        gameObject.SetActive(false);
+
         GPopupManager.Instance.NotifyPopupClosed();
     }
 }
