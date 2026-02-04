@@ -4,13 +4,12 @@ using UnityEngine;
 public class GPopupManager : MonoBehaviour
 {
     public static GPopupManager Instance;
-    [SerializeField]
-    protected GPopupUI popupPrefab;
 
-    Queue<GPopupData> popupQueue = new Queue<GPopupData>();
-    GPopupUI currentPopup;
+    [SerializeField] private Transform popupParent;
 
-    protected void Awake()
+    private Stack<GPopupUI> popupStack = new Stack<GPopupUI>();
+
+    private void Awake()
     {
         if (Instance != null)
         {
@@ -19,37 +18,30 @@ public class GPopupManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
-    public void ShowPopupData(GPopupData data)
+    public T ShowPopup<T>(T popupPrefab, GPopupMessage data = null) where T : GPopupUI
     {
-        popupQueue.Enqueue(data);
-
-        if (currentPopup == null || currentPopup.gameObject.activeSelf)
-        {
-            ShowNext();
-        }
+        T popup = Instantiate(popupPrefab, popupParent);
+        popup.OnOpen(data);
+        popupStack.Push(popup);
+        return popup;
     }
 
-    public void ShowNext()
+    public void CloseTopPopup()
     {
-        if (popupQueue.Count == 0)
-        {
+        if (popupStack.Count == 0)
             return;
-        }
 
-        if (currentPopup == null)
-        {
-            currentPopup = Instantiate(popupPrefab, FindAnyObjectByType<Canvas>().transform);
-
-        }
-        currentPopup.ShowPopup(popupQueue.Dequeue());
+        GPopupUI popup = popupStack.Pop();
+        popup.OnClose();
     }
 
-    public void NotifyPopupClosed()
+    public void CloseAllPopups()
     {
-        ShowNext();
+        while (popupStack.Count > 0)
+        {
+            popupStack.Pop().OnClose();
+        }
     }
-
 }
