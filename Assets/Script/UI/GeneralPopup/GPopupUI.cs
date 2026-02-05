@@ -3,11 +3,16 @@ using TMPro;
 
 public class GPopupUI : MonoBehaviour
 {
-    private TMP_Text messageText;
+    [SerializeField] private TMP_Text messageText;
 
 
-    public virtual void OnOpen(GPopupMessage  data)
+    public virtual void OnOpen(GPopupMessage data)
     {
+        if (messageText == null)
+        {
+            Debug.LogError("There is an empty text");
+            return;
+        }
         messageText.text = data.message;
         gameObject.SetActive(true);
     }

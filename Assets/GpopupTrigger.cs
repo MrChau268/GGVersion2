@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class GPopupTrigger : MonoBehaviour
 {
-    public GPopupUI popup;
+    [SerializeField] protected GPopupUI popupPrefab;
+
+    protected GPopupUI popupInstance;
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
             return;
 
-        var data = new GPopupMessage("Hello Player");
+        if (popupInstance == null)
+        {
+            popupInstance = Instantiate(popupPrefab);
+        }
 
-        popup.OnOpen(data);
+        var data = new GPopupMessage("Hello Player");
+        popupInstance.OnOpen(data);
     }
 }
