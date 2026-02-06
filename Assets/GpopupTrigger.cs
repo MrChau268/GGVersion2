@@ -19,4 +19,15 @@ public class GPopupTrigger : MonoBehaviour
         var data = new GPopupMessage("Hello Player");
         popupInstance.OnOpen(data);
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+        if (popupInstance != null)
+        {
+            popupInstance.OnClose();
+            Destroy(popupInstance.gameObject);
+            popupInstance = null;
+        }
+    }
 }

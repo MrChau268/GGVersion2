@@ -124,6 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1953449479816955177}
+  - component: {fileID: 4882252254577689860}
   m_Layer: 0
   m_Name: Gpopup
   m_TagString: Untagged
@@ -147,6 +148,19 @@ Transform:
   - {fileID: 1748359859443757611}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4882252254577689860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079443987507865051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd3e0f39478a542952939aa8cdce02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageText: {fileID: 3438812892980482978}
 --- !u!1001 &1689278398709543632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -155,6 +169,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1748359859443757611}
     m_Modifications:
+    - target: {fileID: 4826322490932537722, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826322490932537722, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306962692315836789, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5510253873783218347, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -290
+      objectReference: {fileID: 0}
+    - target: {fileID: 5510253873783218347, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733673514234137842, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}
+      propertyPath: m_Name
+      value: Gmess
+      objectReference: {fileID: 0}
     - target: {fileID: 7805193889860976010, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}
       propertyPath: m_Name
       value: GPop
@@ -185,11 +223,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8106871641522699956, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1000
+      value: 550
       objectReference: {fileID: 0}
     - target: {fileID: 8106871641522699956, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 280
+      value: 257.8
       objectReference: {fileID: 0}
     - target: {fileID: 8106871641522699956, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}
       propertyPath: m_LocalPosition.x
@@ -244,6 +282,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}
+--- !u!114 &3438812892980482978 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4091691629166993778, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}
+  m_PrefabInstance: {fileID: 1689278398709543632}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7489733633540312164 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8106871641522699956, guid: 54668ec60b704cb42aee36dbf8423701, type: 3}

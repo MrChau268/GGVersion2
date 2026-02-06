@@ -5,6 +5,7 @@ public class GPopupUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text messageText;
 
+   
 
     public virtual void OnOpen(GPopupMessage data)
     {
